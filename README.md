@@ -55,6 +55,24 @@ Replace `'Open Safari and look up Anthropic'` with your desired instruction.
 
 **Note:** If you do not provide an instruction via the command line, the script will use the default instruction specified in `main.py`. You can edit `main.py` to change this default instruction.
 
+## Running Tests
+
+To run the tests using `pytest`, follow these steps:
+
+1. **Install `pytest` if you haven't already:**
+
+   ```bash
+   pip install pytest
+   ```
+
+2. **Run the tests:**
+
+   ```bash
+   pytest
+   ```
+
+This will automatically discover and run all the test files in the `tests` directory.
+
 ## Exiting the Script
 
 You can quit the script at any time by pressing `Ctrl+C` in the terminal.
