@@ -59,6 +59,24 @@ Replace `'Open Safari and look up Anthropic'` with your desired instruction.
 
 You can quit the script at any time by pressing `Ctrl+C` in the terminal.
 
+## Running Tests
+
+This repository includes automated tests using `pytest`. To run the tests, follow these steps:
+
+1. **Install `pytest` if you haven't already:**
+
+   ```bash
+   pip install pytest
+   ```
+
+2. **Run the tests:**
+
+   ```bash
+   pytest
+   ```
+
+This will discover and run all the tests in the `tests` directory.
+
 ## ⚠ Disclaimer
 
 > [!CAUTION]
