@@ -55,9 +55,13 @@ Replace `'Open Safari and look up Anthropic'` with your desired instruction.
 
 **Note:** If you do not provide an instruction via the command line, the script will use the default instruction specified in `main.py`. You can edit `main.py` to change this default instruction.
 
+## Exiting the Script
+
+You can quit the script at any time by pressing `Ctrl+C` in the terminal.
+
 ## Running Tests
 
-To run the tests using `pytest`, follow these steps:
+This repository includes automated tests using `pytest`. To run the tests, follow these steps:
 
 1. **Install `pytest` if you haven't already:**
 
@@ -71,11 +75,7 @@ To run the tests using `pytest`, follow these steps:
    pytest
    ```
 
-This will automatically discover and run all the test files in the `tests` directory.
-
-## Exiting the Script
-
-You can quit the script at any time by pressing `Ctrl+C` in the terminal.
+This will discover and run all the tests in the `tests` directory.
 
 ## ⚠ Disclaimer
 
