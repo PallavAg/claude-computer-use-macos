@@ -3,6 +3,7 @@ import os
 import sys
 import json
 import base64
+import streamlit as st
 
 from computer_use_demo.loop import sampling_loop, APIProvider
 from computer_use_demo.tools import ToolResult
@@ -40,23 +41,23 @@ async def main():
     # Define callbacks (you can customize these)
     def output_callback(content_block):
         if isinstance(content_block, dict) and content_block.get("type") == "text":
-            print("Assistant:", content_block.get("text"))
+            st.write("Assistant:", content_block.get("text"))
 
     def tool_output_callback(result: ToolResult, tool_use_id: str):
         if result.output:
-            print(f"> Tool Output [{tool_use_id}]:", result.output)
+            st.write(f"> Tool Output [{tool_use_id}]:", result.output)
         if result.error:
-            print(f"!!! Tool Error [{tool_use_id}]:", result.error)
+            st.write(f"!!! Tool Error [{tool_use_id}]:", result.error)
         if result.base64_image:
             # Save the image to a file if needed
             os.makedirs("screenshots", exist_ok=True)
             image_data = result.base64_image
             with open(f"screenshots/screenshot_{tool_use_id}.png", "wb") as f:
                 f.write(base64.b64decode(image_data))
-            print(f"Took screenshot screenshot_{tool_use_id}.png")
+            st.image(f"screenshots/screenshot_{tool_use_id}.png", caption=f"Screenshot {tool_use_id}")
 
     def api_response_callback(response: APIResponse[BetaMessage]):
-        print(
+        st.write(
             "\n---------------\nAPI Response:\n",
             json.dumps(json.loads(response.text)["content"], indent=4),  # type: ignore
             "\n",
@@ -81,4 +82,4 @@ if __name__ == "__main__":
     try:
         asyncio.run(main())
     except Exception as e:
-        print(f"Encountered Error:\n{e}")
+        st.write(f"Encountered Error:\n{e}")

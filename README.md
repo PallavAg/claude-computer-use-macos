@@ -64,3 +64,67 @@ You can quit the script at any time by pressing `Ctrl+C` in the terminal.
 > [!CAUTION]
 > - **Security Risks:** This script allows claude to control your computer's mouse and keyboard and run bash commands. Use it at your own risk.
 > - **Responsibility:** By running this script, you assume all responsibility and liability for any results.
+
+## Streamlit-based GUI
+
+We have now added a modern, high-end, professional graphical user interface (GUI) using Streamlit. Follow the steps below to set up and use the new GUI.
+
+### Installation and Setup
+
+1. **Clone the repository:**
+
+   ```bash
+   git clone https://github.com/PallavAg/claude-computer-use-macos.git
+   cd claude-computer-use-macos
+   ```
+
+2. **Create a virtual environment + install dependencies:**
+
+   ```bash
+   python3.12 -m venv venv
+   source venv/bin/activate
+   pip3.12 install -r requirements.txt
+   ```
+
+3. **Set your Anthropic API key as an environment variable:**
+
+   ```bash
+   export ANTHROPIC_API_KEY="CLAUDE_API_KEY"
+   ```
+
+   Replace `CLAUDE_API_KEY` with your actual Anthropic API key. You find yours [here](https://console.anthropic.com/settings/keys).
+
+4. **Grant Accessibility Permissions:**
+
+   The script uses `pyautogui` to control mouse and keyboard events. On MacOS, you need to grant accessibility permissions. These popups should show automatically the first time you run the script so you can skip this step. But to manually provide permissions:
+
+   - Go to **System Preferences** > **Security & Privacy** > **Privacy** tab.
+   - Select **Accessibility** from the list on the left.
+   - Add your terminal application or Python interpreter to the list of allowed apps.
+
+### Usage
+
+You can run the Streamlit app by executing the following command:
+
+```bash
+streamlit run main.py
+```
+
+This will launch the Streamlit app in your default web browser. You can then interact with the assistant through the web-based GUI.
+
+### Screenshots
+
+Here are some screenshots of the new GUI:
+
+![Screenshot 1](screenshots/screenshot1.png)
+![Screenshot 2](screenshots/screenshot2.png)
+
+### Exiting the App
+
+You can quit the app at any time by closing the browser tab or pressing `Ctrl+C` in the terminal.
+
+## ⚠ Disclaimer
+
+> [!CAUTION]
+> - **Security Risks:** This script allows claude to control your computer's mouse and keyboard and run bash commands. Use it at your own risk.
+> - **Responsibility:** By running this script, you assume all responsibility and liability for any results.
