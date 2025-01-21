@@ -21,19 +21,19 @@ async def main():
 
     # Check if the instruction is provided via command line arguments
     if len(sys.argv) > 1:
-        instruction = " ".join(sys.argv[1:])
+        initial_instruction = " ".join(sys.argv[1:])
     else:
-        instruction = "Save an image of a cat to the desktop."
+        initial_instruction = "Save an image of a cat to the desktop."
 
     print(
-        f"Starting Claude 'Computer Use'.\nPress ctrl+c to stop.\nInstructions provided: '{instruction}'"
+        f"Starting Claude 'Computer Use'.\nPress ctrl+c to stop.\nInitial instructions: '{initial_instruction}'"
     )
 
     # Set up the initial messages
     messages: list[BetaMessageParam] = [
         {
             "role": "user",
-            "content": instruction,
+            "content": initial_instruction,
         }
     ]
 
@@ -62,19 +62,36 @@ async def main():
             "\n",
         )
 
-    # Run the sampling loop
-    messages = await sampling_loop(
-        model="claude-3-5-sonnet-20241022",
-        provider=provider,
-        system_prompt_suffix="",
-        messages=messages,
-        output_callback=output_callback,
-        tool_output_callback=tool_output_callback,
-        api_response_callback=api_response_callback,
-        api_key=api_key,
-        only_n_most_recent_images=10,
-        max_tokens=4096,
-    )
+    while True:
+        try:
+            # Run the sampling loop for current message
+            messages = await sampling_loop(
+                model="claude-3-5-sonnet-20241022",
+                provider=provider,
+                system_prompt_suffix="",
+                messages=messages,
+                output_callback=output_callback,
+                tool_output_callback=tool_output_callback,
+                api_response_callback=api_response_callback,
+                api_key=api_key,
+                only_n_most_recent_images=10,
+                max_tokens=4096,
+            )
+
+            # Get next user input
+            print("\nYou:", end=" ")
+            user_input = input().strip()
+
+            if user_input.lower() in ["exit", "quit"]:
+                print("Ending conversation...")
+                break
+
+            # Add the new user message to the conversation
+            messages.append({"role": "user", "content": user_input})
+
+        except KeyboardInterrupt:
+            print("\nEnding conversation...")
+            break
 
 
 if __name__ == "__main__":
